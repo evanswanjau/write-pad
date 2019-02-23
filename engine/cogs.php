@@ -2,6 +2,33 @@
 
 require_once 'infused_cogs.php'; # request total control file
 
+/*
+----------------------------------------------
+USER FUNCTIONS
+----------------------------------------------
+*/
+
+
+# sign existing user
+
+
+
+# ADMIN SECURITY
+function adminSecurity($link='../'){
+  if (!isset($_COOKIE['Theadmin'])) {
+    header('location: '.$link.'login');
+  }
+}
+
+
+# LOGOUT USER
+function logOut($link='../'){
+  if (isset($_GET['logout'])) {
+    setcookie('Theadmin', "", time() - 43200, "/");
+    header('location: '.$link.'login');
+  }
+}
+
 
 # mathod that cleans all data inputs
 function clean_data($data) {
@@ -595,82 +622,6 @@ function getSubscribers(){
     <div class="add-items">
       <h1>Your subscriber list is empty</h1>
     </div>';
-  }
-}
-
-
-/*
-----------------------------------------------
-USER FUNCTIONS
-----------------------------------------------
-*/
-function userLogin(){
-
-  global $conn;
-
-  if (isset($_POST['login'])) {
-    $errors = array();
-
-    # username
-    if ($_POST['username'] == '') {
-      $errors[] = "<p class='error'>please enter your username</p>";
-    }else {
-      $username = clean_data($_POST['username']);
-    }
-
-    # password
-    if ($_POST['password'] == '') {
-      $errors[] = "<p class='error'>please enter your password</p>";
-    }else {
-      $password = clean_data($_POST['password']);
-    }
-
-    if (empty($errors)) {
-
-      # get username and password
-      $sql = "SELECT username, password FROM user WHERE username = '$username'";
-      $result = $conn->query($sql);
-
-      if($result->num_rows == 1){
-
-        # get admin account username
-        while($row = $result->fetch_assoc()){
-          $dbpassword = $row['password'];
-        }
-        # confirm password is correct
-        if (password_verify($password, $dbpassword)){
-          # assign username session
-          setcookie('Theadmin', $username, time() + 43200, "/");
-          # redirect site
-          header('Location: ../');
-        }else {
-          echo "<p class='error'>incorrect login details</p>";
-        }
-      }else {
-        echo "<p class='error'>that user does not exist</p>";
-      }
-    }else {
-      foreach ($errors as $error) {
-        echo $error;
-      }
-    }
-  }
-}
-
-
-# ADMIN SECURITY
-function adminSecurity($link='../'){
-  if (!isset($_COOKIE['Theadmin'])) {
-    header('location: '.$link.'login');
-  }
-}
-
-
-# LOGOUT USER
-function logOut($link='../'){
-  if (isset($_GET['logout'])) {
-    setcookie('Theadmin', "", time() - 43200, "/");
-    header('location: '.$link.'login');
   }
 }
 

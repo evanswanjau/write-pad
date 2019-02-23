@@ -23,7 +23,15 @@
       <h1>Writer's Pad <img src='../image-backgrounds/quilt.png'></h1>
       <form class="ui-form" action="" method="post">
         <h2>Login</h2><br>
-        <?php userLogin(); ob_end_flush();?>
+        <?php 
+
+          if (isset($_POST['login'])) {
+            # sign in this user
+            $current_user->signin_user($_POST['username'], $_POST['password']);
+          }
+        
+          ob_end_flush();
+        ?>
         <input type="text" name="username" placeholder="username"><br><br>
         <input type="password" name="password" placeholder="password"><br><br><br>
         <input type="submit" name="login" value="login"><br><br>

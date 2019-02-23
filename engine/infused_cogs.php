@@ -12,6 +12,7 @@ session_start(); # initilizes session variable
 
 # reqest subordinate files
 require_once 'connection.php';
+require_once 'user_module.php';
 require_once 'cogs.php';
 
 
