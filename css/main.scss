@@ -1,0 +1,776 @@
+/*
+------------------------------------------------
+Main concepts and style variables
+------------------------------------------------
+*/
+$font: 'Nunito', nunito, sans-serif;
+$theme-color:#19A15E;
+$text-color:#444;
+$dark-color:#1E9C5E;
+$error:#D64949;
+
+body{
+  font-family:$font!important;
+  background-color:#efefef!important;
+}
+
+*{
+  margin:0%;
+  padding:0%;
+  outline:0;
+}
+
+.cap{
+  text-transform: capitalize;
+}
+
+.right{
+  float:right;
+}
+
+.left{
+  float:left;
+}
+
+.add-new{
+  border:1px solid $theme-color;
+  position:fixed;
+  font-size:3em!important;
+  right:3%;
+  z-index:2;
+  color:$theme-color;
+  border-radius:100%;
+  transition: background .5s;
+}
+
+.add-new:hover{
+  text-decoration: none;
+  background-color:$theme-color;
+  color:#fff;
+}
+/*
+------------------------------------------------
+BUTTON STYLING
+------------------------------------------------
+*/
+button{
+  border:none;
+  font-family:$font;
+  padding:1% 2%;
+  background-color:$theme-color;
+  cursor: pointer;
+  border-radius:3px;
+  color:#fff;
+  transition:background .5s, box-shadow .5s;
+}
+
+button:hover{
+  background-color:$theme-color * .7;
+}
+
+
+
+
+
+
+/*
+--------------------------------------------
+Top Menu
+--------------------------------------------
+*/
+
+.top-menu{
+  background-color:#fff;
+  position: fixed;
+  width:100%;
+  z-index:3;
+  padding-top:.5%;
+  padding-right:1%;
+  color:$theme-color;
+  font-family:$font;
+  box-shadow: 0 5px 5px -3px rgba($theme-color, .3);
+
+  span{
+    width:50%;
+    float:right;
+    text-align: right;
+    padding-right:2%;
+
+    li{
+      text-align: center;
+      padding-left:5%;
+    }
+  }
+
+  i{
+   transition:color .5s;
+  }
+
+  i:hover{
+    color:$theme-color;
+  }
+
+  li{
+    display: inline-block;
+    text-decoration:none;
+    padding:.1% 1% 0% 1%;
+  }
+
+  a{
+    color:$theme-color;
+    transition:color .5s;
+  }
+}
+
+
+
+
+
+
+
+/*
+------------------------------------------------
+side menu design
+------------------------------------------------
+*/
+
+.side-menu{
+  background-color:#fff;
+  height:100vh;
+  padding:5% 0%;
+  overflow-y:auto;
+  box-shadow: 5px 0 5px -3px rgba($theme-color, .3);
+
+  .profile{
+    padding-left:10%;
+    margin:10% 0%;
+
+    img{
+      width:150px;
+      text-align: center;
+      border-radius:100%;
+      margin:1%;
+    }
+
+    p{
+      padding:1% 6%;
+      color:#999;
+      margin:2% 3%;
+    }
+
+    p:hover{
+      color:$theme-color;
+    }
+  }
+
+
+
+  ul{
+    width:100%;
+  }
+
+  li{
+    padding:5% 15%;
+    list-style: none;
+    transition:background .3s;
+
+    i{
+      float: left;
+      padding-right:3%;
+    }
+  }
+
+  a{
+    color:$theme-color;
+  }
+
+  a:hover{
+    color:$theme-color;
+    text-decoration: none;
+
+    li{
+      background-color:#efefef;
+    }
+  }
+
+  .current{
+    background-color:#efefef;
+    color:$theme-color;
+  }
+}
+
+
+
+
+
+/*
+------------------------------------------------
+right side
+------------------------------------------------
+*/
+
+.right-side{
+  height:100vh;
+  overflow-y:auto;
+  padding:3% 1%;
+
+  h3{
+    color:$theme-color;
+  }
+
+  .success, .error{
+    width:40%;
+  }
+}
+
+
+
+
+
+.add-new{
+  border:1px solid #fff;
+  position:fixed;
+  font-size:3.5em!important;
+  right:3%;
+  margin-top:1%;
+  z-index:2;
+  color:$theme-color;
+  border-radius:100%;
+ transition: background .5s;
+}
+
+.add-new:hover{
+  text-decoration: none;
+  background-color:#fff;
+  color:$theme-color;
+}
+
+.add-items{
+  text-align: center;
+
+  h1{
+    padding:5%;
+  }
+
+  a{
+    color:#fff;
+  }
+
+  button{
+    border:none;
+    font-family:$font;
+    padding:1% 2%;
+    background-color:$theme-color;
+    cursor: pointer;
+    border-radius:3px;
+    color:#fff;
+    box-shadow: 0 4px $theme-color * .5;
+   transition:background .5s, box-shadow .5s;
+  }
+
+  button:hover{
+    background-color:$theme-color * .7;
+  }
+
+  button:active{
+    background-color:$theme-color * .5;
+    box-shadow: 0 3px $theme-color * .5;
+    transform: translateY(2px);
+  }
+}
+
+
+
+
+
+
+/*
+------------------------------------------------
+ form design
+------------------------------------------------
+*/
+.ui-form{
+  padding:3%;
+
+  input[type='text'],[type='email'],[type='password'], [type='date'], textarea, select{
+    padding:1.2%;
+    width:40%;
+    border:none;
+    font-family:$font;
+    border-radius:5px;
+    color:$text-color;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  input[type='submit']{
+    border:none;
+    font-family:$font;
+    padding:1% 2%;
+    background-color:$theme-color;
+    cursor: pointer;
+    border-radius:3px;
+    color:#fff;
+    box-shadow: 0 4px $theme-color * .5;
+    transition:background .5s, box-shadow .5s;
+  }
+
+  input[type='submit']:hover{
+    background-color:$theme-color * .7;
+  }
+
+  input[type='submit']:active{
+    background-color:$theme-color * .5;
+    box-shadow: 0 3px $theme-color * .5;
+    transform: translateY(2px);
+  }
+
+  input[type='file']{
+    background-color:#fff;
+    width:40%;
+    padding:1%;
+    border-radius:3px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .update-image{
+    img{
+      height:100PX;
+      width: auto;
+    }
+  }
+}
+
+
+
+
+
+
+/*
+------------------------------------------------
+Error and Success messages report
+------------------------------------------------
+*/
+.error{
+  background-color:$error;
+  border-radius:3px;
+  width:30%;
+  margin:.5% auto!important;
+  padding:.7%;
+  color:#fff;
+}
+
+.success{
+  @extend .error;
+  background-color:#34ca66;
+}
+
+
+
+
+
+/*
+------------------------------------------------
+MY POST
+------------------------------------------------
+*/
+.article-post{
+  background-color:#fff;
+  border-radius:3px;
+  margin:.5%;
+  width:32%;
+  padding:0%;
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+
+  h4{
+    text-align: center;
+    padding:1%;
+    font-weight: bold;
+  }
+
+  img{
+    max-width:100%;
+    min-width:100%;
+    max-height:250px;
+    width:auto;
+  }
+
+  p{
+    height:70px;
+    margin:2%;
+    text-align: justify;
+  }
+
+  a{
+    color:#666;
+  }
+
+  b{
+    font-size:12px;
+    color:#888;
+    text-transform: lowercase!important;
+  }
+
+  .post-image{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
+    width:100%;
+    height:200px;
+    font-family:$font;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+    box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, 0);
+   transition:box-shadow .5s;
+
+    span{
+      background-color:#fff;
+      color:#000;
+      float: right;
+      text-align: center;
+      transition:background .5s;
+    }
+  }
+
+  .list{
+    width:100%;
+    text-align: right;
+
+    li{
+      padding:0% 5%;
+      color:#666;
+      list-style: none;
+      display: inline-block;
+
+      i{
+        float: left;
+      }
+    }
+  }
+
+  span{
+    padding:1%;
+  }
+
+}
+
+.article-post:hover{
+
+  a{
+    text-decoration: none;
+  }
+
+  .post-image{
+    box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, 0.6);
+  }
+}
+
+
+
+
+
+/*
+--------------------------------------------
+SECURITY PAGE STYLING
+--------------------------------------------
+*/
+
+.admin-ui{
+  background-color:#fff;
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+  border-radius:3px;
+  padding:2% 1%;
+  margin:1% 0%;
+
+  .ui-form{
+    padding:0%;
+
+    input[type='text'],[type='password']{
+      padding:1%;
+      width:30%;
+      background-color:#efefef;
+      transition:background .5s;
+      box-shadow:none;
+    }
+
+    input[type='file']{
+      padding:1%;
+      width:30%;
+      background-color:#efefef;
+      box-shadow:none;
+    }
+
+    input[type='submit']{
+      padding:.7%;
+    }
+
+    input[type='text']:focus,[type='password']:focus{
+      background-color:#dfdfdf;
+      box-shadow:none;
+    }
+
+    img{
+      width:100px;
+      border-radius:100%;
+    }
+
+    .error, .success{
+      margin-left:0%!important;
+      width:30%;
+    }
+  }
+}
+
+
+
+
+
+
+/*
+--------------------------------------------
+SUBSCRIBER STYLING
+--------------------------------------------
+*/
+.parent{
+  background-color:#fff;
+  padding-top:1%;
+  padding-bottom:.3%;
+  box-shadow: 0 0 2px 2px rgba(#999, 0.2);
+  margin:.5% 0%;
+  border-radius:3px;
+  color:$text-color;
+  font-size:13px;
+  cursor:default;
+  transition: background .5s, transition .5s;
+
+  li{
+    list-style:none;
+    display: inline-block;
+    width:17%;
+    border-left:1px solid #c1c1c1;
+    text-align: center;
+  }
+
+  .status{
+    float:right;
+    margin-right:47%;
+  }
+}
+
+.parent:hover{
+  transform:scale(1.0045);
+  background-color:$theme-color;
+  color:#fff;
+
+  .status{
+    color:#fff!important;
+  }
+}
+
+.formal{
+  background-color:transparent!important;
+  box-shadow:none;
+}
+
+
+
+
+
+
+/*
+------------------------------------------------
+LOGIN STYLING
+------------------------------------------------
+*/
+.login-ui{
+  background-color:$theme-color;
+  height:100vh;
+  text-align: center;
+  color:$text-color;
+
+  h1{
+    color:#fff;
+    margin:2% 0%;
+  }
+
+  .ui-form{
+    border-radius:3px;
+    width:30%;
+    padding:2% 0%;
+    margin: auto;
+
+    .success, .error{
+      width:70%;
+      padding:2%;
+    }
+
+    h2{
+      color:#fff;
+      text-align: left;
+      padding:1%;
+      width:70%;
+      margin-left:15%;
+      margin-bottom:5%;
+      border-bottom:1px solid #fff;
+    }
+
+    input[type='text'],[type='password']{
+      border:1px solid #fff;
+      width:70%;
+      padding:3%;
+      margin:.5% 0%;
+      box-shadow:none;
+      color:#000;
+      background-color:#fff;
+      transition:border .2s;
+    }
+
+    input[type='submit']{
+      padding:2.5%;
+      width:30%;
+      background-color:$theme-color * .9;
+    }
+
+    input[type='submit']:hover{
+      background-color:$theme-color * .7;
+    }
+
+    input[type='text']:focus, [type='password']:focus{
+      border-top:1px solid transparent;
+      border-right:1px solid transparent;
+      border-left:1px solid transparent;
+      box-shadow: 0 0 3px 2px rgba($theme-color, 0.1);
+    }
+  }
+
+  footer{
+    color:#fff;
+
+    i{
+      color:#FA2532;
+      margin-bottom:-2%;
+    }
+
+    a{
+      color:#fff;
+    }
+
+  }
+}
+
+
+
+
+/*
+----------------------------------------------
+DASHBOARD STYLING
+----------------------------------------------
+*/
+// popular post
+.popular-post{
+  h3{
+    text-align: center;
+    border-bottom:1px solid $theme-color;
+    padding:1%;
+    color:$theme-color;
+  }
+
+  .article-post{
+    width:100%;
+  }
+}
+
+.holder{
+  padding:1%;
+}
+
+.top{
+  .count{
+    background-color:#c2ffe1;
+  }
+}
+
+// daily counts
+.count{
+  padding:4% 3%;
+  background-color:#fff;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius:3px;
+  width:19%;
+  margin:.5%;
+  color:$text-color;
+  text-transform: uppercase;
+  cursor: default;
+
+  p{
+    font-size:1em;
+    span{
+      font-size:40px;
+      padding:0% 5%;
+    }
+  }
+}
+
+
+// message holder
+.message-holder{
+  padding:3%;
+  background-color:#fff;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius:3px;
+  overflow-y: scroll;
+  height:450px;
+
+  .message{
+    padding:1%;
+    border-radius:3px;
+    width:100%;
+    margin:1% 0%;
+    transition:transform .2s;
+
+    span{
+      float: right;
+      padding-bottom:3%;
+      text-transform: lowercase;
+      font-size:12px;
+      font-weight: bold;
+    }
+  }
+
+  .message:hover{
+    transform: scale(1.025);
+  }
+}
+
+
+// message tip styling
+.tip{
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+  position: relative;
+  float: left;
+  margin-left:-4%;
+}
+
+
+footer{
+  position:absolute;
+  bottom:0%;
+  color:$theme-color;
+  left:0%;
+  width:99.9%;
+  text-align: center;
+  padding:1% 0%;
+
+  i{
+    color:#FA2532;
+    margin-bottom:-2%;
+  }
+
+  a{
+    color:$theme-color;
+  }
+
+}
