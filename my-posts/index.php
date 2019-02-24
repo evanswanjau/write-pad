@@ -1,4 +1,4 @@
-<?php require_once '../engine/infused_cogs.php';  adminSecurity(); logOut();?>
+<?php require_once '../engine/infused_cogs.php'; $current_user->admin_security(); $current_user->logout();?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,7 +34,7 @@
         <div class="col-sm-2 side-menu">
           <a href="../security">
             <div class="profile">
-              <?php echo getProfilePic('../'); ?>
+            <img src="../image-backgrounds/<?php echo $current_user->get_user_data()['image'] ?>" alt="Profile Image">
               <p>@<?php echo strtolower($_COOKIE['Theadmin']); ?></p>
             </div>
           </a>
@@ -55,7 +55,42 @@
           <?php else: ?>
             <a href="../new-post"class='material-icons right show-form add-new' title='new post' style='cursor:pointer;font-size:20px;'>add_circle</a>
             <div class="col-sm-12">
-              <?php myPosts(); ?>
+              <?php $posts = $current_post->get_posts();?>
+
+              <?php if ($posts): ?>
+
+              <?php foreach ($posts as $key => $value): ?>
+
+                <?php $style = ($posts[$key]['status'] == 0) ? "style='-webkit-filter:grayscale(100%);'" : NULL; ?>
+                <?php $echo = ($posts[$key]['status'] == 0) ? "<span>draft</span>" : NULL; ?>
+                <?php $article = substr(strip_tags(str_replace("`", "'", $posts[$key]['blog'])), 0, strrpos(substr(strip_tags(str_replace("`", "'", $posts[$key]['blog'])), 0, 150), ' ')) . '...'; ?>
+
+                <a href='?article=<?php echo str_replace(" ", "-", str_replace("'", "", str_replace("`", "'", $posts[$key]['title']) ));?>&article-post=<?php echo $posts[$key]['post_id']; ?>' style='color:#333;'>
+                  <div class='article-post col-sm-3' <?php echo $style ?>>
+                    <div style='background: url(../image-backgrounds/<?php echo $posts[$key]['image'] ?>) no-repeat center center;background-size: cover;' class='post-image'>
+                      <?php echo $echo; ?>
+                    </div>
+                    <h4 class='cap'><?php echo str_replace("`", "'", $posts[$key]['title']); ?></h4>
+                    <p><?php echo $article ?></p>
+                    <ul class='list right'>
+                      <li title='reads'><i class='material-icons'>remove_red_eye</i>&nbsp <?php echo $posts[$key]['reads'] ?></li>
+                      <li title='likes'><i class='material-icons'>favorite</i>&nbsp <?php echo $posts[$key]['likes'] ?></li>
+                      <li title='edit'><a href='../new-post/?<?php echo str_replace(" ", "-", str_replace("'", "", str_replace("`", "'", $posts[$key]['title']) ))?>&article-post=<?php echo $posts[$key]['post_id']; ?>'><i class='material-icons'>edit</i>&nbsp</a></li>
+                      <li title='delete'><i class='material-icons'>delete</i>&nbsp</li>
+                    </ul>
+                    <br><br>
+                    <span class='right'><b>posted <?php echo timeSpan($posts[$key]['image']) ?></b></span>
+                  </div>
+                </a>
+
+              <?php endforeach; ?>
+
+              <?php else: ?>
+                <div class="add-items">
+                  <h1>Write your first artcle</h1>
+                  <a href="../new-post"><button>new post</button></a>
+                </div>
+              <?php endif; ?>             
             </div>
           <?php endif; ?>
           <p>&nbsp</p>

@@ -150,7 +150,7 @@ class User{
   }
 
   # change password
-  public function changePassword($oldpassword, $newpassword, $confirmpassword){
+  public function change_password($oldpassword, $newpassword, $confirmpassword){
 
     global $conn;
 
@@ -206,14 +206,14 @@ class User{
   }
 
   # security
-  public function adminSecurity($link='../'){
+  public function admin_security($link='../'){
     if (!isset($_COOKIE['Theadmin'])) {
       header('location: '.$link.'login');
     }
   }
 
   # logout function
-  function logOut($link='../'){
+  function logout($link='../'){
     if (isset($_GET['logout'])) {
       setcookie('Theadmin', "", time() - 43200, "/");
       header('location: '.$link.'login');

@@ -1,26 +1,17 @@
-<?php
-
-require_once '../engine/infused_cogs.php';
-adminSecurity();
-logOut();
+<?php require_once '../engine/infused_cogs.php'; $current_user->admin_security(); $current_user->logout();
 ob_start();
 
 if (isset($_GET['article-post']) && $_GET['article-post'] != '') {
-  $id = $_GET['article-post'];
 
-  $sql = "SELECT * FROM posts WHERE post_id = $id";
-  $result = $conn->query($sql);
+  $post = $current_post->get_posts($_GET['article-post']);
 
-  while($row = $result->fetch_assoc()) {
-    $post_id = $row['post_id'];
-    $title = str_replace("`", "'", $row['title']);
-    $article = $row['blog'];
-    $article = str_replace("`", "'", $article);
-    $dbimage = $row['image'];
-  }
-}else {
-  $id = null;
-  $dbimage = null;
+  $id = $post['post_id'];
+  $title = str_replace("`", "'", $post['title']);
+  $article = str_replace("`", "'", $post['blog']);
+  $dbimage = $post['image'];
+
+}else{
+  $id = NULL; $dbimage = NULL;
 }
 
 ?>
@@ -71,7 +62,7 @@ if (isset($_GET['article-post']) && $_GET['article-post'] != '') {
         <div class="col-sm-2 side-menu">
           <a href="../security">
             <div class="profile">
-              <?php echo getProfilePic('../'); ?>
+              <img src="../image-backgrounds/<?php echo $current_user->get_user_data()['image'] ?>" alt="Profile Image">
               <p>@<?php echo strtolower($_COOKIE['Theadmin']); ?></p>
             </div>
           </a>
@@ -87,7 +78,28 @@ if (isset($_GET['article-post']) && $_GET['article-post'] != '') {
 
         <div class="col-sm-10 right-side">
           <form class="ui-form" action="" method="post" enctype="multipart/form-data">
-            <?php newPost(); editPost($id, $dbimage);?>
+            <?php 
+            
+            if (isset($_POST['publish'])) {
+
+              $current_post->new_post($_POST['title'], $_POST['post'], 'publish');
+
+            }else if (isset($_POST['draft'])){
+
+              $current_post->new_post($_POST['title'], $_POST['post'], 'draft');
+
+            }else if (isset($_POST['edit-publish'])){
+
+              $current_post->edit_post($id, $dbimage, $_POST['title'], $_POST['post'], 'edit-publish');
+
+            }else if (isset($_POST['edit-draft'])){
+
+              $current_post->edit_post($id, $dbimage, $_POST['title'], $_POST['post'], 'edit-draft');
+
+            }
+            
+            ?>
+
             <input type="text" name="title" placeholder="Title" value="<?php if (isset($_SESSION['title'])) {echo $_SESSION['title'];} if (empty($title)) {echo null;}else {echo $title;}?>"><br><br>
             <textarea class="edit" name="post" placeholder="Write your story..."><?php if (isset($_SESSION['post'])) {echo $_SESSION['post'];} if (empty($article)) {echo null;}else {echo $article;}?></textarea><br>
 
@@ -103,8 +115,8 @@ if (isset($_GET['article-post']) && $_GET['article-post'] != '') {
             <input type="file" name="image"><br><br>
 
             <?php if (isset($_GET['article-post']) && $_GET['article-post'] != ''): ?>
-              <input type="submit" name="edit-publish" value="publish">&nbsp
-              <input type="submit" name="edit-draft" value="save as draft">
+              <input type="submit" name="edit-publish" value="edit publish">&nbsp
+              <input type="submit" name="edit-draft" value="edit save as draft">
             <?php else: ?>
               <input type="submit" name="publish" value="publish">&nbsp
               <input type="submit" name="draft" value="save as draft">

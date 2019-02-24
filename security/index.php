@@ -1,5 +1,4 @@
-<?php require_once '../engine/infused_cogs.php';ob_start(); adminSecurity(); logOut();?>
-<!-- EVans Wanjau Website -->
+<?php require_once '../engine/infused_cogs.php';ob_start(); $current_user->admin_security(); $current_user->logout();?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -37,7 +36,7 @@
         <div class="col-sm-2 side-menu">
           <a href="">
             <div class="profile">
-              <?php echo getProfilePic('../'); ?>
+              <img src="../image-backgrounds/<?php echo $current_user->get_user_data()['image'] ?>" alt="Profile Image">
               <p>@<?php echo strtolower($_COOKIE['Theadmin']); ?></p>
             </div>
           </a>
@@ -57,7 +56,13 @@
             <form class="ui-form" action="" method="post" enctype="multipart/form-data">
               <h4>change profile picture</h4>
               <?php  echo getProfilePic('../'); ?><br><br>
-              <?php changeProfilePic();?>
+              <?php 
+              
+              if (isset($_POST['change-profile-pic'])) {
+                $current_user->change_profile_picture();
+              }
+              
+              ?>
               <input type="file" name="image"><br>  <!-- Chane username -->
               <input type="submit" name="change-profile-pic" value="change profile picture">
             </form>
@@ -66,7 +71,12 @@
           <div class="admin-ui">
             <form class="ui-form" action="" method="post">
               <h4>change username</h4>
-              <?php changeUsername(); ?>
+              <?php 
+              if (isset($_POST['change-username'])) {
+                $current_user->change_username($_POST['username']);
+              }
+              
+              ?>
               <input type="text" name="username" value="<?php echo strtolower($_COOKIE['Theadmin']); ?>" placeholder="username"><br><br>  <!-- Chane username -->
               <input type="submit" name="change-username" value=" change username">
             </form>
@@ -75,7 +85,14 @@
           <div class="admin-ui">
             <form class="ui-form" action="" method="post">
               <h4>change password</h4>
-              <?php changePassword(); ob_end_flush();?>
+              <?php 
+              
+              if (isset($_POST['change-password'])) {
+                $current_user->change_password($_POST['old-password'], $_POST['new-password'], $_POST['confirm-password']);
+              }
+              ob_end_flush();
+              
+              ?>
               <input type="password" name="old-password" placeholder="old password"><br><br>
               <input type="password" name="new-password" placeholder="new password"><br><br>
               <input type="password" name="confirm-password" placeholder="confirm password"><br><br>

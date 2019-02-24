@@ -1,4 +1,4 @@
-<?php require_once 'engine/infused_cogs.php'; adminSecurity(''); logOut('');?>
+<?php require_once 'engine/infused_cogs.php'; $current_user->admin_security(''); $current_user->logout('');?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,8 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
   </head>
-
-  <?php print_r($current_user->get_user_data()); ?>
 
   <!-- Top Menu -->
   <section>
@@ -39,7 +37,7 @@
         <div class="col-sm-2 side-menu">
           <a href="security">
             <div class="profile">
-              <?php echo getProfilePic(); ?>
+             <img src="image-backgrounds/<?php echo $current_user->get_user_data()['image'] ?>" alt="Profile Image">
               <p>@<?php echo strtolower($_COOKIE['Theadmin']); ?></p>
             </div>
           </a>
