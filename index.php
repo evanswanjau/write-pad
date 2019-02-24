@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
 
+  <?php print_r($current_user->get_user_data()); ?>
+
   <!-- Top Menu -->
   <section>
     <div class="top-menu">
